@@ -21,6 +21,7 @@ public partial class AdminActivity : System.Web.UI.Page
         string userName = TextBox4.Text;
         string password = TextBox5.Text;
 
+        //DataBase Connection for creating faculty login data
         SqlConnection con = new SqlConnection();
         con.ConnectionString = @"Data Source=(localdb)\MSSQLlocalDB;Initial Catalog=QuestionBank;Integrated Security=True;Pooling=False";
         string query = "INSERT INTO Faculty VALUES (@empId,@name,@subject,@coord,@username,@password)";

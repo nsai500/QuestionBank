@@ -19,6 +19,7 @@
         <asp:Button ID="Button1" runat="server" Text="Sign up Faculty" OnClick="signup"/>
         <br /><br />
         <asp:Label ID="Label1" runat="server"></asp:Label>
+        <br /><br />
     </div>
     <div  style="width:50%;">
 

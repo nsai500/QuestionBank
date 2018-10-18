@@ -37,6 +37,7 @@ public partial class LoginPage : System.Web.UI.Page
             {
                 Session["username"] = username;
                 Session["subject"] = ds.Tables[0].Rows[0]["Subject"];
+                Session["Co-ordinator"] = ds.Tables[0].Rows[0]["Co_ordinator"];
                 Response.Redirect("FacultyActivity.aspx");
             }
             else //TODO Put Validator

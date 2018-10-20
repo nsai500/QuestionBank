@@ -5,6 +5,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div>
         <asp:Button ID="Button3" runat="server" Text="Set Question Paper" OnClick="setQuestionPaper" Visible="false"/>
+        <br /><br />
+        <asp:label runat="server" ID="Label3"></asp:label>
     </div>
     <div id="row1" style="display:flex; flex-direction:row; justify-content: space-around;">
             <div id="addMCQ" style="display:flex; flex-direction:column;">
@@ -28,7 +30,7 @@
                 <br /><br />
                 <asp:button runat="server" text="Show Added MCQs" OnClick="showMcqs"/>
                 <br /><br />
-                <asp:gridview runat="server" ID="GridView1"></asp:gridview>
+                <asp:Gridview runat="server" ID="GridView1"></asp:Gridview>
             </div>
             <div  id="addQuestion" style="display:flex; flex-direction:column;">
                 <asp:TextBox ID="TextBox8" runat="server" placeholder="Question"></asp:TextBox>
@@ -41,7 +43,7 @@
                 <br /><br />
                 <asp:button runat="server" text="Show Added Questions" OnClick="showQuestions"/>
                 <br /><br />
-                <asp:gridview runat="server" ID="GridView2" CellPadding="4" ForeColor="#333333" Width="200">
+                <asp:Gridview runat="server" ID="GridView2" CellPadding="4" ForeColor="#333333" Width="200">
                     <alternatingrowstyle BackColor="White" ForeColor="#284775"></alternatingrowstyle>
                     <Columns>
                         <asp:TemplateField Visible="false">
@@ -55,11 +57,7 @@
                     <headerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></headerstyle>
                     <pagerstyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center"></pagerstyle>
                     <rowstyle BackColor="#F7F6F3" ForeColor="#333333"></rowstyle>
-                    <selectedrowstyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333"></selectedrowstyle>
-                    <sortedascendingcellstyle BackColor="#E9E7E2"></sortedascendingcellstyle>
-                    <sortedascendingheaderstyle BackColor="#506C8C"></sortedascendingheaderstyle>
-                    <sorteddescendingcellstyle BackColor="#FFFDF8"></sorteddescendingcellstyle>
-                    <sorteddescendingheaderstyle BackColor="#6F8DAE"></sorteddescendingheaderstyle></asp:gridview>
+                    <selectedrowstyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333"></selectedrowstyle></asp:Gridview>
             </div>
     </div>
 </asp:Content>

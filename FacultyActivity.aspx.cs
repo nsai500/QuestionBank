@@ -16,6 +16,7 @@ public partial class FacultyActivity : System.Web.UI.Page
         {
             Button3.Visible = true;
             GridView2.Columns[0].Visible = true;
+//            GridView2.AutoGenerateSelectButton = true;
         }
     }
 
@@ -155,6 +156,15 @@ public partial class FacultyActivity : System.Web.UI.Page
 
     protected void setQuestionPaper(object sender, EventArgs e)
     {
-
+        string result = "";
+        foreach (GridViewRow row in GridView2.Rows)
+        {
+            CheckBox check = (CheckBox)row.FindControl("myCheckBox");
+            if (check != null &&  check.Checked)
+            {
+                result += row.Cells[1].Text;
+            }
+        }
+        Label3.Text = result;
     }
 }

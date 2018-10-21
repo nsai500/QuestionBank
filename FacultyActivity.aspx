@@ -4,7 +4,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div>
-        <asp:Button ID="Button3" runat="server" Text="Set Question Paper" OnClick="setQuestionPaper" Visible="false"/>
+        <asp:TextBox ID="TextBox10" runat="server" placeholder="Question Paper Name">  </asp:TextBox><asp:Button ID="Button3" runat="server" Text="Set Question Paper" OnClick="setQuestionPaper" Visible="false" OnClientClick="return confirm('Are you sure?');"/>
+        <br /><br />
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please specify a name" ControlToValidate="TextBox10" ForeColor="Red"></asp:RequiredFieldValidator>
         <br /><br />
         <asp:label runat="server" ID="Label3"></asp:label>
     </div>
@@ -30,7 +32,16 @@
                 <br /><br />
                 <asp:button runat="server" text="Show Added MCQs" OnClick="showMcqs"/>
                 <br /><br />
-                <asp:Gridview runat="server" ID="GridView1"></asp:Gridview>
+                <asp:Gridview runat="server" ID="GridView1">
+                    <Columns>
+                        <asp:TemplateField Visible="false">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="myCheckBox" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                    <headerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></headerstyle>
+                </asp:Gridview>
             </div>
             <div  id="addQuestion" style="display:flex; flex-direction:column;">
                 <asp:TextBox ID="TextBox8" runat="server" placeholder="Question"></asp:TextBox>
@@ -44,7 +55,6 @@
                 <asp:button runat="server" text="Show Added Questions" OnClick="showQuestions"/>
                 <br /><br />
                 <asp:Gridview runat="server" ID="GridView2" CellPadding="4" ForeColor="#333333" Width="200">
-                    <alternatingrowstyle BackColor="White" ForeColor="#284775"></alternatingrowstyle>
                     <Columns>
                         <asp:TemplateField Visible="false">
                             <ItemTemplate>
@@ -52,13 +62,10 @@
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
-                    <editrowstyle BackColor="#999999"></editrowstyle>
-                    <footerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></footerstyle>
                     <headerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></headerstyle>
-                    <pagerstyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center"></pagerstyle>
-                    <rowstyle BackColor="#F7F6F3" ForeColor="#333333"></rowstyle>
-                    <selectedrowstyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333"></selectedrowstyle></asp:Gridview>
+                    </asp:Gridview>
             </div>
     </div>
+    <asp:GridView ID="GridView3" runat="server"></asp:GridView>
 </asp:Content>
 

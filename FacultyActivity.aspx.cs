@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -15,8 +16,8 @@ public partial class FacultyActivity : System.Web.UI.Page
         if (co_ordinator)
         {
             Button3.Visible = true;
+            GridView1.Columns[0].Visible = true;
             GridView2.Columns[0].Visible = true;
-//            GridView2.AutoGenerateSelectButton = true;
         }
     }
 
@@ -160,7 +161,7 @@ public partial class FacultyActivity : System.Web.UI.Page
         foreach (GridViewRow row in GridView2.Rows)
         {
             CheckBox check = (CheckBox)row.FindControl("myCheckBox");
-            if (check != null &&  check.Checked)
+            if (check != null && check.Checked)
             {
                 result += row.Cells[1].Text;
             }

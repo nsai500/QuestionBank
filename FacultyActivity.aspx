@@ -3,13 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div>
-        <asp:TextBox ID="TextBox10" runat="server" placeholder="Question Paper Name">  </asp:TextBox><asp:Button ID="Button3" runat="server" Text="Set Question Paper" OnClick="setQuestionPaper" Visible="false" OnClientClick="return confirm('Are you sure?');"/>
-        <br /><br />
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please specify a name" ControlToValidate="TextBox10" ForeColor="Red"></asp:RequiredFieldValidator>
-        <br /><br />
-        <asp:label runat="server" ID="Label3"></asp:label>
-    </div>
     <div id="row1" style="display:flex; flex-direction:row; justify-content: space-around;">
             <div id="addMCQ" style="display:flex; flex-direction:column;">
                 <asp:TextBox ID="TextBox1" runat="server" placeholder="Question"></asp:TextBox>
@@ -66,6 +59,5 @@
                     </asp:Gridview>
             </div>
     </div>
-    <asp:GridView ID="GridView3" runat="server"></asp:GridView>
 </asp:Content>
 

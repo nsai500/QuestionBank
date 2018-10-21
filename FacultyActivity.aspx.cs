@@ -157,15 +157,44 @@ public partial class FacultyActivity : System.Web.UI.Page
 
     protected void setQuestionPaper(object sender, EventArgs e)
     {
-        string result = "";
+        DataTable dt = new DataTable();
+        dt.Columns.Add("Question");
+        dt.Columns.Add("Marks");
         foreach (GridViewRow row in GridView2.Rows)
         {
             CheckBox check = (CheckBox)row.FindControl("myCheckBox");
             if (check != null && check.Checked)
             {
-                result += row.Cells[1].Text;
+                DataRow dr = dt.NewRow();
+                dr["Question"] = row.Cells[1].Text;
+                dr["Marks"] = row.Cells[2].Text;
+                dt.Rows.Add(dr);
             }
         }
-        Label3.Text = result;
+        Session["SelectedQuestions"] = dt;
+        dt = new DataTable();
+        dt.Columns.Add("Question");
+        dt.Columns.Add("OptionA");
+        dt.Columns.Add("OptionB");
+        dt.Columns.Add("OptionC");
+        dt.Columns.Add("OptionD");
+        dt.Columns.Add("Marks");
+        foreach (GridViewRow row in GridView1.Rows)
+        {
+            CheckBox check = (CheckBox)row.FindControl("myCheckBox");
+            if (check != null && check.Checked)
+            {
+                DataRow dr = dt.NewRow();
+                dr["Question"] = row.Cells[1].Text;
+                dr["OptionA"] = row.Cells[2].Text;
+                dr["OptionB"] = row.Cells[3].Text;
+                dr["OptionC"] = row.Cells[4].Text;
+                dr["OptionD"] = row.Cells[5].Text;
+                dr["Marks"] = row.Cells[7].Text;
+                dt.Rows.Add(dr);
+            }
+        }
+        Session["SelectedMcqs"] = dt;
+        Response.Redirect("QuestionPaperActivity.aspx");
     }
 }

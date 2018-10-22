@@ -3,6 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <div>
+        <asp:Button ID="Button3" runat="server" Text="Set Question Paper" OnClick="setQuestionPaper" OnClientClick="return confirm('Are you sure?')"/>
+    </div>
     <div id="row1" style="display:flex; flex-direction:row; justify-content: space-around;">
             <div id="addMCQ" style="display:flex; flex-direction:column;">
                 <asp:TextBox ID="TextBox1" runat="server" placeholder="Question"></asp:TextBox>

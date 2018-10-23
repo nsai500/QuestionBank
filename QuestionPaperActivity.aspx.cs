@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -20,21 +22,23 @@ public partial class QuestionPaperActivity : System.Web.UI.Page
             GridView1.DataBind();
             GridView2.DataBind();
 
-            DataTable dt = (DataTable)Session["SelectedMcqs"];
+            //DataTable dt = (DataTable)Session["SelectedMcqs"];
 
-            BinaryFormatter bformatter = new BinaryFormatter();
-            MemoryStream stream = new MemoryStream();
+            //BinaryFormatter bformatter = new BinaryFormatter();
+            //MemoryStream stream = new MemoryStream();
 
-            bformatter.Serialize(stream, dt);
-            byte[] b = stream.ToArray();
-            stream.Close();
-
-            //Now deserialise
-            stream = new MemoryStream(b);
-            dt = (DataTable)bformatter.Deserialize(stream);
-            stream.Close();
-            gv3.DataSource = dt;
-            gv3.DataBind();
+            //bformatter.Serialize(stream, dt);
+            //byte[] b = stream.ToArray();
+            //string base64_string = Convert.ToBase64String(b);
+            //stream.Close();
+            Label1.Text = ((decimal)Session["TotalMarks"]).ToString();
+            ////Now deserialise
+            //b = Convert.FromBase64String(base64_string);
+            //stream = new MemoryStream(b);
+            //dt = (DataTable)bformatter.Deserialize(stream);
+            //stream.Close();
+            //gv3.DataSource = dt;
+            //gv3.DataBind();
         }
     }
 
@@ -50,4 +54,59 @@ public partial class QuestionPaperActivity : System.Web.UI.Page
         return encoding.GetString(barr, 0, barr.Length);
     }
 
+
+    protected void addQP(object sender, EventArgs e)
+    {
+        DataTable dt = (DataTable)Session["SelectedMcqs"];
+        BinaryFormatter bformatter = new BinaryFormatter();
+        MemoryStream stream = new MemoryStream();
+        bformatter.Serialize(stream, dt);
+        byte[] b = stream.ToArray();
+        string mcqs = Convert.ToBase64String(b);
+        DataTable dt2 = (DataTable)Session["SelectedQuestions"];
+        bformatter.Serialize(stream, dt2);
+        b = stream.ToArray();
+        string questions = Convert.ToBase64String(b);
+        stream.Close();
+        dt.Clear();
+        dt2.Clear();
+        string subject = (string)Session["subject"];
+        string username = (string)Session["username"];
+        string addedOn = DateTime.Now.ToString();
+        string qpName = TextBox1.Text;
+        string id = Guid.NewGuid().ToString();
+        DateTime examDate =DateTime.ParseExact(TextBox2.Text, "d/M/yyyy", CultureInfo.InvariantCulture);
+        string duration = TextBox3.Text;
+        string marks = ((decimal)Session["TotalMarks"]).ToString();
+
+        //DataBase Connection for adding Question Paper
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = @"Data Source=(localdb)\MSSQLlocalDB;Initial Catalog=QuestionBank;Integrated Security=True;Pooling=False";
+        string query = "INSERT INTO QuestionPapers VALUES (@mcqs,@questions,@subject,@addedBy,@addedOn,@qpName,@id,@examDate,@duration,@marks)";
+        SqlCommand cmd = new SqlCommand(query, con);
+        cmd.Parameters.AddWithValue("@mcqs", mcqs);
+        cmd.Parameters.AddWithValue("@questions", questions);
+        cmd.Parameters.AddWithValue("@subject", subject);
+        cmd.Parameters.AddWithValue("@addedBy", username);
+        cmd.Parameters.AddWithValue("@addedOn", Convert.ToDateTime(addedOn));
+        cmd.Parameters.AddWithValue("@qpName", qpName);
+        cmd.Parameters.AddWithValue("@id", id);
+        cmd.Parameters.AddWithValue("@examDate", examDate);
+        cmd.Parameters.AddWithValue("@duration", Convert.ToInt32(duration));
+        cmd.Parameters.AddWithValue("@marks", Convert.ToDecimal(marks));
+        try
+        {
+            con.Open();
+            cmd.ExecuteNonQuery();
+            Label1.Text = "Question Paper Added Successfully";
+        }
+        catch (Exception exception)
+        {
+            Label1.Text = exception.ToString(); //TODO Make it UI Friendly
+        }
+        finally
+        {
+            con.Close();
+        }
+    }
 }

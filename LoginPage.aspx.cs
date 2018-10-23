@@ -11,9 +11,10 @@ public partial class LoginPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //TextBox1.Text = "marco"; //TODO For Testing
-        //TextBox2.Text = "marco";
+        TextBox1.Text = "marco"; //TODO For Testing
+        TextBox2.Text = "marco";
         //login(Button1, EventArgs.Empty);
+        //Response.Redirect("AdminActivity.aspx");
     }
 
     protected void login(object sender, EventArgs e)

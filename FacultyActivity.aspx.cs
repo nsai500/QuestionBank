@@ -157,6 +157,7 @@ public partial class FacultyActivity : System.Web.UI.Page
 
     protected void setQuestionPaper(object sender, EventArgs e)
     {
+        decimal marks = 0;
         DataTable dt = new DataTable();
         dt.Columns.Add("Question");
         dt.Columns.Add("Marks");
@@ -168,6 +169,7 @@ public partial class FacultyActivity : System.Web.UI.Page
                 DataRow dr = dt.NewRow();
                 dr["Question"] = row.Cells[1].Text;
                 dr["Marks"] = row.Cells[2].Text;
+                marks += Convert.ToDecimal(row.Cells[2].Text);
                 dt.Rows.Add(dr);
             }
         }
@@ -191,10 +193,12 @@ public partial class FacultyActivity : System.Web.UI.Page
                 dr["OptionC"] = row.Cells[4].Text;
                 dr["OptionD"] = row.Cells[5].Text;
                 dr["Marks"] = row.Cells[7].Text;
+                marks += Convert.ToDecimal(row.Cells[7].Text);
                 dt.Rows.Add(dr);
             }
         }
         Session["SelectedMcqs"] = dt;
+        Session["TotalMarks"] = marks;
         Response.Redirect("QuestionPaperActivity.aspx");
     }
 }

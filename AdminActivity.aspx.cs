@@ -58,7 +58,7 @@ public partial class AdminActivity : System.Web.UI.Page
         con.ConnectionString = @"Data Source=(localdb)\MSSQLlocalDB;Initial Catalog=QuestionBank;Integrated Security=True;Pooling=False";
         string query = "SELECT * FROM QuestionPapers WHERE id=@id";//"SELECT QuestionPaperName,Id,Duration,Marks,ExamDate,Subject FROM QuestionPapers";
         SqlCommand cmd = new SqlCommand(query, con);
-        cmd.Parameters.AddWithValue("@id", id);
+        cmd.Parameters.AddWithValue("@id",id);
         SqlDataAdapter adp = new SqlDataAdapter(cmd);
         DataSet ds = new DataSet();
         try
@@ -92,7 +92,7 @@ public partial class AdminActivity : System.Web.UI.Page
         ListBox1.Items.Clear();
         SqlConnection con = new SqlConnection();
         con.ConnectionString = @"Data Source=(localdb)\MSSQLlocalDB;Initial Catalog=QuestionBank;Integrated Security=True;Pooling=False";
-        string query = "SELECT Id FROM QuestionPapers";
+        string query = "SELECT Id,QuestionPaperName FROM QuestionPapers";
         SqlCommand cmd = new SqlCommand(query, con);
         try
         {
@@ -100,7 +100,7 @@ public partial class AdminActivity : System.Web.UI.Page
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                ListBox1.Items.Add(reader["Id"].ToString());
+                ListBox1.Items.Add(new ListItem(reader["QuestionPaperName"].ToString(), reader["Id"].ToString()));
             }
         }
         catch (Exception exception)

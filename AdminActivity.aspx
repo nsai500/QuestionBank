@@ -24,9 +24,7 @@
     <div  style="width:50%;">
         <asp:Button ID="Button3" runat="server" Text="Populate ListBox" OnClick="populate"/>
         <br /><br />
-        <asp:Button ID="Button2" runat="server" Text="Display Question Papers" OnClick="displayQp"/>
-        <br /><br />
-        <asp:ListBox ID="ListBox1" runat="server"></asp:ListBox>
+        <asp:ListBox ID="ListBox1" runat="server" AutoPostBack="true" OnSelectedIndexChanged="displayQp"></asp:ListBox>
         <br /><br />
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="true"></asp:GridView>
     </div>

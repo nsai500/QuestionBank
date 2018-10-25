@@ -10,6 +10,7 @@
             <br /><br />
             <asp:Button ID="Button1" runat="server" Text="Login" OnClick="login"/>
             <br /><br />
-            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/AdminLogin.aspx">Administrator?</asp:HyperLink>
+            <%--<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/AdminLogin.aspx">Administrator?</asp:HyperLink>--%>
+            <asp:CheckBox ID="CheckBox1" runat="server" Text="Administrator"/>
         </div>
 </asp:Content>

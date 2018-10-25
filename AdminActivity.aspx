@@ -25,12 +25,16 @@
         <div  style="display:flex; flex-direction:column;">
             <div id="row2" style="display:flex; flex-direction:row; justify-content: space-around;">
                 <div style="display:flex; flex-direction:column;">
+                    Display All Papers
+                    <br /><br />
                     <asp:Button ID="Button3" runat="server" Text="Show Question Papers" OnClick="populate"/>
                     <br /><br />
                     <asp:ListBox ID="ListBox1" runat="server" AutoPostBack="true" OnSelectedIndexChanged="displayQp"></asp:ListBox>
                     <br /><br />
                 </div>
                 <div style="display:flex; flex-direction:column;">
+                    Select Subject Wise
+                    <br /><br />
                     <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" AutoPostBack="true" OnSelectedIndexChanged="populate2" DataTextField="Subject"></asp:DropDownList>
                     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$connectionStrings:cs1 %>" 
                         SelectCommand="SELECT distinct Subject FROM QuestionPapers">

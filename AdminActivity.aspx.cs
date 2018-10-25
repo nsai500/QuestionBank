@@ -74,16 +74,27 @@ public partial class AdminActivity : System.Web.UI.Page
         {
             con.Close();
             DataTable dt = ds.Tables["QuestionPapers"];
+            string mcqs = dt.Rows[0]["Mcqs"].ToString();
             string questions = dt.Rows[0]["Questions"].ToString();
             BinaryFormatter bformatter = new BinaryFormatter();
             MemoryStream stream = new MemoryStream();
 
-            byte[] b = Convert.FromBase64String(questions);
+            byte[] b = Convert.FromBase64String(mcqs);
             stream = new MemoryStream(b);
             dt = (DataTable)bformatter.Deserialize(stream);
             stream.Close();
             GridView1.DataSource = dt;
             GridView1.DataBind();
+
+            byte[] b2 = Convert.FromBase64String(questions);
+            BinaryFormatter bformatter2 = new BinaryFormatter();
+            MemoryStream stream2 = new MemoryStream();
+            stream2 = new MemoryStream(b2);
+            DataTable dt2 = (DataTable)bformatter2.Deserialize(stream2);
+            stream2.Close();
+            GridView2.DataSource = dt2;
+            GridView2.DataBind();
+
         }
     }
 
@@ -113,4 +124,34 @@ public partial class AdminActivity : System.Web.UI.Page
         }
 
     }
+
+    protected void populate2(object sender, EventArgs e)
+    {
+        ListBox1.Items.Clear();
+        string subject = DropDownList1.SelectedValue;
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = @"Data Source=(localdb)\MSSQLlocalDB;Initial Catalog=QuestionBank;Integrated Security=True;Pooling=False";
+        string query = "SELECT Id,QuestionPaperName FROM QuestionPapers WHERE subject=@subject";
+        SqlCommand cmd = new SqlCommand(query, con);
+        cmd.Parameters.AddWithValue("@subject", subject);
+        try
+        {
+            con.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                ListBox1.Items.Add(new ListItem(reader["QuestionPaperName"].ToString(), reader["Id"].ToString()));
+            }
+        }
+        catch (Exception exception)
+        {
+            Label1.Text = exception.ToString();
+        }
+        finally
+        {
+            con.Close();
+        }
+
+    }
+
 }

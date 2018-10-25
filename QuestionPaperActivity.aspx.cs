@@ -22,23 +22,7 @@ public partial class QuestionPaperActivity : System.Web.UI.Page
             GridView1.DataBind();
             GridView2.DataBind();
 
-            //DataTable dt = (DataTable)Session["SelectedMcqs"];
-
-            //BinaryFormatter bformatter = new BinaryFormatter();
-            //MemoryStream stream = new MemoryStream();
-
-            //bformatter.Serialize(stream, dt);
-            //byte[] b = stream.ToArray();
-            //string base64_string = Convert.ToBase64String(b);
-            //stream.Close();
             Label1.Text = ((decimal)Session["TotalMarks"]).ToString();
-            ////Now deserialise
-            //b = Convert.FromBase64String(base64_string);
-            //stream = new MemoryStream(b);
-            //dt = (DataTable)bformatter.Deserialize(stream);
-            //stream.Close();
-            //gv3.DataSource = dt;
-            //gv3.DataBind();
         }
     }
 
@@ -63,11 +47,15 @@ public partial class QuestionPaperActivity : System.Web.UI.Page
         bformatter.Serialize(stream, dt);
         byte[] b = stream.ToArray();
         string mcqs = Convert.ToBase64String(b);
+
         DataTable dt2 = (DataTable)Session["SelectedQuestions"];
-        bformatter.Serialize(stream, dt2);
-        b = stream.ToArray();
-        string questions = Convert.ToBase64String(b);
+        BinaryFormatter bformatter2 = new BinaryFormatter();
+        MemoryStream stream2 = new MemoryStream();
+        bformatter2.Serialize(stream2, dt2);
+        byte[] b2 = stream2.ToArray();
+        string questions = Convert.ToBase64String(b2);
         stream.Close();
+        stream2.Close();
         dt.Clear();
         dt2.Clear();
         string subject = (string)Session["subject"];

@@ -13,4 +13,5 @@ Default skin template. The following skins are provided as examples only.
 
 <asp:Image runat="server" ImageUrl="~/images/image1.jpg" />
 --%>
-<asp:panel runat="server" BorderColor="#990000" Height="116px" style="width:278px; border:1px solid; text-align:center; margin: 0 auto;"></asp:panel>
+<asp:panel runat="server" BorderColor="#990000" Height="175px" style="width:278px; border:1px solid white; text-align:center; margin: 0 auto;"></asp:panel>
+<asp:panel runat="server" SkinID="loginHeader" BorderColor="#990000" style="text-align:center; margin: 0 auto;"></asp:panel>

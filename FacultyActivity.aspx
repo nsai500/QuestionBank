@@ -1,10 +1,12 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="FacultyActivity.aspx.cs" Inherits="FacultyActivity" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="FacultyActivity.aspx.cs" Inherits="FacultyActivity" Theme="Theme1"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <asp:Label runat="server" Visible="False"></asp:Label>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div>
         <asp:Button ID="Button3" runat="server" Text="Set Question Paper" OnClick="setQuestionPaper" OnClientClick="return confirm('Are you sure?')" Visible="false"/>
+        <br /><br />
     </div>
     <div id="row1" style="display:flex; flex-direction:row; justify-content: space-around;">
             <div id="addMCQ" style="display:flex; flex-direction:column;">
@@ -24,11 +26,10 @@
                 <br /><br />
                 <asp:Button ID="Button1" runat="server" Text="Add MCQ" OnClick="addMCQ"/>
                 <br /><br />
-                <asp:Label ID="Label1" runat="server"></asp:Label>
-                <br /><br />
+                <asp:Label ID="Label1" runat="server" ForeColor="White"></asp:Label>
                 <asp:button runat="server" text="Show Added MCQs" OnClick="showMcqs"/>
                 <br /><br />
-                <asp:Gridview runat="server" ID="GridView1">
+                <asp:Gridview runat="server" ID="GridView1" CellPadding="4" ForeColor="#333333" Width="200" BorderColor="Black">
                     <Columns>
                         <asp:TemplateField Visible="false">
                             <ItemTemplate>
@@ -37,6 +38,9 @@
                         </asp:TemplateField>
                     </Columns>
                     <headerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></headerstyle>
+                    <headerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></headerstyle>
+                    <AlternatingRowStyle BackColor="#BFE4FF" ForeColor="Black"  />
+                    <RowStyle ForeColor="Black" BackColor="White" />
                 </asp:Gridview>
             </div>
             <div  id="addQuestion" style="display:flex; flex-direction:column;">
@@ -46,11 +50,10 @@
                 <br /><br />
                 <asp:Button ID="Button2" runat="server" Text="Add Question" OnClick="addQuestion"/>
                 <br /><br />
-                <asp:Label ID="Label2" runat="server"></asp:Label>
-                <br /><br />
+                <asp:Label ID="Label2" runat="server" ForeColor="White"></asp:Label>
                 <asp:button runat="server" text="Show Added Questions" OnClick="showQuestions"/>
                 <br /><br />
-                <asp:Gridview runat="server" ID="GridView2" CellPadding="4" ForeColor="#333333" Width="200">
+                <asp:Gridview runat="server" ID="GridView2" CellPadding="4" ForeColor="#333333" Width="200" BorderColor="Black">
                     <Columns>
                         <asp:TemplateField Visible="false">
                             <ItemTemplate>
@@ -59,6 +62,8 @@
                         </asp:TemplateField>
                     </Columns>
                     <headerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></headerstyle>
+                    <AlternatingRowStyle BackColor="#BFE4FF" ForeColor="Black"  />
+                    <RowStyle ForeColor="Black" BackColor="White" />
                     </asp:Gridview>
             </div>
     </div>

@@ -100,6 +100,7 @@ public partial class AdminActivity : System.Web.UI.Page
 
     protected void populate(object sender, EventArgs e)
     {
+        ListBox1.Visible = true;
         ListBox1.Items.Clear();
         SqlConnection con = new SqlConnection();
         con.ConnectionString = @"Data Source=(localdb)\MSSQLlocalDB;Initial Catalog=QuestionBank;Integrated Security=True;Pooling=False";

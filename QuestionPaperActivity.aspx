@@ -1,9 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="QuestionPaperActivity.aspx.cs" Inherits="QuestionPaperActivity" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="QuestionPaperActivity.aspx.cs" Inherits="QuestionPaperActivity" Theme="Theme1"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    Question Paper
+    <asp:Label ID="Label2" runat="server" Text="Question Paper" ForeColor="White"></asp:Label>
     <br /><br />
     <asp:TextBox ID="TextBox1" runat="server" placeholder="Question Paper Name"></asp:TextBox>
     <br /><br />
@@ -13,9 +13,18 @@
     <br /><br />
     <asp:Button ID="Button1" runat="server" Text="Submit Question Paper" OnClick="addQP"/>
     <br /><br />
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="true"></asp:GridView>
-    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="true"></asp:GridView>
-    <asp:gridview runat="server" ID="gv3"></asp:gridview>
-    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" Width="200" BorderColor="Black">
+        <headerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></headerstyle>
+        <headerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></headerstyle>
+        <AlternatingRowStyle BackColor="#BFE4FF" ForeColor="Black"  />
+        <RowStyle ForeColor="Black" BackColor="White" />
+    </asp:GridView>
+    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" Width="200" BorderColor="Black">
+        <headerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></headerstyle>
+        <headerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></headerstyle>
+        <AlternatingRowStyle BackColor="#BFE4FF" ForeColor="Black"  />
+        <RowStyle ForeColor="Black" BackColor="White" />
+    </asp:GridView>
+    <asp:Label ID="Label1" runat="server" ForeColor="White"></asp:Label>
 </asp:Content>
 

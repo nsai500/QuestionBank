@@ -21,8 +21,6 @@ public partial class QuestionPaperActivity : System.Web.UI.Page
             GridView2.DataSource = (DataTable)Session["SelectedQuestions"];
             GridView1.DataBind();
             GridView2.DataBind();
-
-            Label1.Text = ((decimal)Session["TotalMarks"]).ToString();
         }
     }
 

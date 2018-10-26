@@ -65,31 +65,63 @@ public partial class FacultyActivity : System.Web.UI.Page
 
     protected void showMcqs(object sender, EventArgs e)
     {
-        string username = (string)Session["username"];
+        bool co_ordinator = (bool)Session["Co-ordinator"];
+        if (!co_ordinator)
+        {
+            string username = (string)Session["username"];
 
-        //DataBase Connection for displaying added MCQs of a faculty
-        SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Data Source=(localdb)\MSSQLlocalDB;Initial Catalog=QuestionBank;Integrated Security=True;Pooling=False";
-        string query = "SELECT question,optionA,optionB,optionC,optionD,answer,mark FROM Mcqs WHERE UserName=@username";
-        SqlCommand cmd = new SqlCommand(query, con);
-        cmd.Parameters.AddWithValue("@username", username);
-        SqlDataAdapter adp = new SqlDataAdapter(cmd);
-        DataSet ds = new DataSet();
-        try
+            //DataBase Connection for displaying added MCQs of a faculty
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = @"Data Source=(localdb)\MSSQLlocalDB;Initial Catalog=QuestionBank;Integrated Security=True;Pooling=False";
+            string query = "SELECT question,optionA,optionB,optionC,optionD,answer,mark FROM Mcqs WHERE UserName=@username";
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@username", username);
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            try
+            {
+                con.Open();
+                adp.Fill(ds, "Mcqs");
+            }
+            catch (Exception exception)
+            {
+                Label1.Text = exception.ToString(); //TODO Make it UI Friendly
+            }
+            finally
+            {
+                con.Close();
+                DataTable dt = ds.Tables["Mcqs"];
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+            }
+        }else
         {
-            con.Open();
-            adp.Fill(ds,"Mcqs");
-        }
-        catch (Exception exception)
-        {
-            Label1.Text = exception.ToString(); //TODO Make it UI Friendly
-        }
-        finally
-        {
-            con.Close();
-            DataTable dt = ds.Tables["Mcqs"];
-            GridView1.DataSource = dt;
-            GridView1.DataBind();
+            string subject = (string)Session["Subject"];
+
+            //DataBase Connection for displaying added MCQs of a faculty
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = @"Data Source=(localdb)\MSSQLlocalDB;Initial Catalog=QuestionBank;Integrated Security=True;Pooling=False";
+            string query = "SELECT question,optionA,optionB,optionC,optionD,answer,mark FROM Mcqs WHERE Subject=@subject";
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@subject", subject);
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            try
+            {
+                con.Open();
+                adp.Fill(ds, "Mcqs");
+            }
+            catch (Exception exception)
+            {
+                Label1.Text = exception.ToString(); //TODO Make it UI Friendly
+            }
+            finally
+            {
+                con.Close();
+                DataTable dt = ds.Tables["Mcqs"];
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+            }
         }
     }
 
@@ -127,31 +159,63 @@ public partial class FacultyActivity : System.Web.UI.Page
 
     protected void showQuestions(object sender, EventArgs e)
     {
-        string username = (string)Session["username"];
+        bool co_ordinator = (bool)Session["Co-ordinator"];
+        if (!co_ordinator)
+        {
+            string username = (string)Session["username"];
 
-        //DataBase Connection for displaying added Questions of a faculty
-        SqlConnection con = new SqlConnection();
-        con.ConnectionString = @"Data Source=(localdb)\MSSQLlocalDB;Initial Catalog=QuestionBank;Integrated Security=True;Pooling=False";
-        string query = "SELECT question,mark FROM Questions WHERE UserName=@username";
-        SqlCommand cmd = new SqlCommand(query, con);
-        cmd.Parameters.AddWithValue("@username", username);
-        SqlDataAdapter adp = new SqlDataAdapter(cmd);
-        DataSet ds = new DataSet();
-        try
+            //DataBase Connection for displaying added Questions of a faculty
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = @"Data Source=(localdb)\MSSQLlocalDB;Initial Catalog=QuestionBank;Integrated Security=True;Pooling=False";
+            string query = "SELECT question,mark FROM Questions WHERE UserName=@username";
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@username", username);
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            try
+            {
+                con.Open();
+                adp.Fill(ds, "Questions");
+            }
+            catch (Exception exception)
+            {
+                Label2.Text = exception.ToString(); //TODO Make it UI Friendly
+            }
+            finally
+            {
+                con.Close();
+                DataTable dt = ds.Tables["Questions"];
+                GridView2.DataSource = dt;
+                GridView2.DataBind();
+            }
+        }else
         {
-            con.Open();
-            adp.Fill(ds, "Questions");
-        }
-        catch (Exception exception)
-        {
-            Label2.Text = exception.ToString(); //TODO Make it UI Friendly
-        }
-        finally
-        {
-            con.Close();
-            DataTable dt = ds.Tables["Questions"];
-            GridView2.DataSource = dt;
-            GridView2.DataBind();
+            string subject = (string)Session["Subject"];
+
+            //DataBase Connection for displaying added Questions of a faculty
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = @"Data Source=(localdb)\MSSQLlocalDB;Initial Catalog=QuestionBank;Integrated Security=True;Pooling=False";
+            string query = "SELECT question,mark FROM Questions WHERE Subject=@subject";
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@subject", subject);
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            try
+            {
+                con.Open();
+                adp.Fill(ds, "Questions");
+            }
+            catch (Exception exception)
+            {
+                Label2.Text = exception.ToString(); //TODO Make it UI Friendly
+            }
+            finally
+            {
+                con.Close();
+                DataTable dt = ds.Tables["Questions"];
+                GridView2.DataSource = dt;
+                GridView2.DataBind();
+            }
         }
     }
 

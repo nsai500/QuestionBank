@@ -47,7 +47,7 @@ public partial class LoginPage : System.Web.UI.Page
                 }
                 else //TODO Put Validator
                 {
-                    TextBox1.Text = "Please Try Again!";
+                    Label1.Text = "Incorrect Username or Password!";
                 }
             }
         }else
@@ -60,7 +60,7 @@ public partial class LoginPage : System.Web.UI.Page
             }
             else
             {
-                TextBox1.Text = "Please Try Again!";
+                Label1.Text = "Incorrect Username or Password!";
             }
         }
     }

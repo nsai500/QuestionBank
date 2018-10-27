@@ -265,4 +265,5 @@ public partial class FacultyActivity : System.Web.UI.Page
         Session["TotalMarks"] = marks;
         Response.Redirect("QuestionPaperActivity.aspx");
     }
+
 }

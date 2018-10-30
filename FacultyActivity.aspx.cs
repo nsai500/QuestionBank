@@ -291,6 +291,50 @@ public partial class FacultyActivity : System.Web.UI.Page
         }
     }
 
+    protected void delete(object sender, EventArgs e)
+    {
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = @"Data Source=(localdb)\MSSQLlocalDB;Initial Catalog=QuestionBank;Integrated Security=True;Pooling=False";
+        string query = "DELETE FROM Questions WHERE question=@question";
+        SqlCommand cmd = new SqlCommand(query, con);
+
+        try
+        {
+            con.Open();
+            foreach (GridViewRow row in GridView2.Rows)
+            {
+                CheckBox check = (CheckBox)row.FindControl("myCheckBox");
+                if (check != null && check.Checked)
+                {
+                    string question = row.Cells[1].Text;
+                    cmd.Parameters.AddWithValue("@question", question);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            query = "DELETE FROM Mcqs WHERE question=@question";
+            cmd = new SqlCommand(query, con);
+            foreach (GridViewRow row in GridView1.Rows)
+            {
+                CheckBox check = (CheckBox)row.FindControl("myCheckBox");
+                if (check != null && check.Checked)
+                {
+                    string question = row.Cells[1].Text;
+                    cmd.Parameters.AddWithValue("@question", question);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        catch (Exception exception)
+        {
+            Label2.Text = "Error Occurred, Please check the input!";
+        }
+        finally
+        {
+            con.Close();
+            Response.Redirect("FacultyActivity.aspx");
+        }
+    }
+
     protected void logout(Object sender, EventArgs e)
     {
         HttpCookie cookie = Request.Cookies["LoginInfo"];

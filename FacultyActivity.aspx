@@ -12,6 +12,7 @@
     <br /><br />
     <div>
         <asp:Button ID="Button3" runat="server" Text="Set Question Paper" OnClick="setQuestionPaper" OnClientClick="return confirm('Are you sure?')" Visible="false"/>
+        <asp:Button ID="Button4" runat="server" Text="Delete Selected" OnClick="delete" OnClientClick="return confirm('Are you sure?')"/>
         <br /><br />
     </div>
     <div id="row1" style="display:flex; flex-direction:row; justify-content: space-around;">

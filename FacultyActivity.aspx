@@ -1,9 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="FacultyActivity.aspx.cs" Inherits="FacultyActivity" Theme="Theme1"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <asp:HyperLink runat="server" NavigateUrl="LoginPage.aspx" ForeColor="White">Logout</asp:HyperLink>
+    <asp:panel runat="server" SkinID="loginHeader">
+        <asp:Label runat="server" ForeColor="White" Font-Size="XX-Large" ID="UsernameLabel"></asp:Label>
+    </asp:panel>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <asp:panel runat="server" SkinID="logout">
+        <asp:LinkButton runat="server" ForeColor="White" OnClick="logout">Logout</asp:LinkButton>
+    </asp:panel>
+    <br /><br />
     <div>
         <asp:Button ID="Button3" runat="server" Text="Set Question Paper" OnClick="setQuestionPaper" OnClientClick="return confirm('Are you sure?')" Visible="false"/>
         <br /><br />
@@ -46,45 +52,51 @@
                 <br /><br />
                 <asp:button runat="server" text="Show Added MCQs" OnClick="showMcqs"/>
                 <br /><br />
-                <asp:Gridview runat="server" ID="GridView1" CellPadding="4" ForeColor="#333333" Width="200" BorderColor="Black">
-                    <Columns>
-                        <asp:TemplateField Visible="false">
-                            <ItemTemplate>
-                                <asp:CheckBox ID="myCheckBox" runat="server" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                    <headerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></headerstyle>
-                    <headerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></headerstyle>
-                    <AlternatingRowStyle BackColor="#BFE4FF" ForeColor="Black"  />
-                    <RowStyle ForeColor="Black" BackColor="White" />
-                </asp:Gridview>
+                <div style="width: 100%; height: 400px; overflow: scroll">
+                    <asp:Gridview runat="server" ID="GridView1" CellPadding="4" ForeColor="#333333" Width="200" BorderColor="Black">
+                        <Columns>
+                            <asp:TemplateField Visible="false">
+                                <ItemTemplate>
+                                    <asp:CheckBox ID="myCheckBox" runat="server" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                        <headerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></headerstyle>
+                        <headerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></headerstyle>
+                        <AlternatingRowStyle BackColor="#BFE4FF" ForeColor="Black"  />
+                        <RowStyle ForeColor="Black" BackColor="White" />
+                    </asp:Gridview>
+                </div>
             </div>
             <div  id="addQuestion" style="display:flex; flex-direction:column;">
                 <asp:TextBox ID="TextBox8" runat="server" placeholder="Question"></asp:TextBox>
-                <br /><br />
+                <br />
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="Question is required" ControlToValidate="TextBox8" ValidationGroup="Question" ForeColor="White"></asp:RequiredFieldValidator>
+                <br />
                 <asp:TextBox ID="TextBox9" runat="server" placeholder="Marks"></asp:TextBox>
-                <br /><br />
+                <br />
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="Mark is required" ControlToValidate="TextBox9" ValidationGroup="Question" ForeColor="White"></asp:RequiredFieldValidator>
                 <asp:RangeValidator ID="RangeValidator2" runat="server" ErrorMessage="Enter mark between 0 and 99.9" Type="Double" MinimumValue="0" MaximumValue="99.9" ControlToValidate="TextBox9" ValidationGroup="Question" ForeColor="White"></asp:RangeValidator>
+                <br />
                 <asp:Button ID="Button2" runat="server" Text="Add Question" OnClick="addQuestion" ValidationGroup="Question"/>
                 <br /><br />
                 <asp:Label ID="Label2" runat="server" ForeColor="White"></asp:Label>
                 <asp:button runat="server" text="Show Added Questions" OnClick="showQuestions"/>
                 <br /><br />
-                <asp:Gridview runat="server" ID="GridView2" CellPadding="4" ForeColor="#333333" Width="200" BorderColor="Black">
-                    <Columns>
-                        <asp:TemplateField Visible="false">
-                            <ItemTemplate>
-                                <asp:CheckBox ID="myCheckBox" runat="server" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                    <headerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></headerstyle>
-                    <AlternatingRowStyle BackColor="#BFE4FF" ForeColor="Black"  />
-                    <RowStyle ForeColor="Black" BackColor="White" />
+                <div style="width: 100%; height: 400px; overflow: scroll">
+                    <asp:Gridview runat="server" ID="GridView2" CellPadding="4" ForeColor="#333333" Width="200" BorderColor="Black">
+                        <Columns>
+                            <asp:TemplateField Visible="false">
+                                <ItemTemplate>
+                                    <asp:CheckBox ID="myCheckBox" runat="server" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                        <headerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></headerstyle>
+                        <AlternatingRowStyle BackColor="#BFE4FF" ForeColor="Black"  />
+                        <RowStyle ForeColor="Black" BackColor="White" />
                     </asp:Gridview>
+                </div>
             </div>
     </div>
 </asp:Content>

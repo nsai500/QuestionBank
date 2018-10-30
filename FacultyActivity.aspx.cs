@@ -12,6 +12,15 @@ public partial class FacultyActivity : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!IsPostBack)
+        {
+            string username = Request.QueryString["Username"];
+            if(username == null)
+            {
+                username = (string)Session["username"];
+            }
+            UsernameLabel.Text = "Welcome " + username +"!";
+        }
         bool co_ordinator = (bool)Session["Co-ordinator"];
         if (co_ordinator)
         {
@@ -55,7 +64,7 @@ public partial class FacultyActivity : System.Web.UI.Page
         }
         catch (Exception exception)
         {
-            Label1.Text = exception.ToString(); //TODO Make it UI Friendly
+            Label1.Text = "Error Occurred, Please check the input!";//exception.ToString();
         }
         finally
         {
@@ -85,7 +94,7 @@ public partial class FacultyActivity : System.Web.UI.Page
             }
             catch (Exception exception)
             {
-                Label1.Text = exception.ToString(); //TODO Make it UI Friendly
+                Label1.Text = "Error Occurred, Please check the input!";
             }
             finally
             {
@@ -113,7 +122,7 @@ public partial class FacultyActivity : System.Web.UI.Page
             }
             catch (Exception exception)
             {
-                Label1.Text = exception.ToString(); //TODO Make it UI Friendly
+                Label1.Text = "Error Occurred, Please check the input!";
             }
             finally
             {
@@ -149,7 +158,7 @@ public partial class FacultyActivity : System.Web.UI.Page
         }
         catch (Exception exception)
         {
-            Label2.Text = exception.ToString(); //TODO Make it UI Friendly
+            Label2.Text = "Error Occurred, Please check the input!";
         }
         finally
         {
@@ -179,7 +188,7 @@ public partial class FacultyActivity : System.Web.UI.Page
             }
             catch (Exception exception)
             {
-                Label2.Text = exception.ToString(); //TODO Make it UI Friendly
+                Label2.Text = "Error Occurred, Please check the input!";
             }
             finally
             {
@@ -207,7 +216,7 @@ public partial class FacultyActivity : System.Web.UI.Page
             }
             catch (Exception exception)
             {
-                Label2.Text = exception.ToString(); //TODO Make it UI Friendly
+                Label2.Text = "Error Occurred, Please check the input!";
             }
             finally
             {
@@ -221,6 +230,7 @@ public partial class FacultyActivity : System.Web.UI.Page
 
     protected void setQuestionPaper(object sender, EventArgs e)
     {
+        int count = 0;
         decimal marks = 0;
         DataTable dt = new DataTable();
         dt.Columns.Add("Question");
@@ -230,6 +240,7 @@ public partial class FacultyActivity : System.Web.UI.Page
             CheckBox check = (CheckBox)row.FindControl("myCheckBox");
             if (check != null && check.Checked)
             {
+                count++;
                 DataRow dr = dt.NewRow();
                 dr["Question"] = row.Cells[1].Text;
                 dr["Marks"] = row.Cells[2].Text;
@@ -250,6 +261,7 @@ public partial class FacultyActivity : System.Web.UI.Page
             CheckBox check = (CheckBox)row.FindControl("myCheckBox");
             if (check != null && check.Checked)
             {
+                count++;
                 DataRow dr = dt.NewRow();
                 dr["Question"] = row.Cells[1].Text;
                 dr["OptionA"] = row.Cells[2].Text;
@@ -263,7 +275,34 @@ public partial class FacultyActivity : System.Web.UI.Page
         }
         Session["SelectedMcqs"] = dt;
         Session["TotalMarks"] = marks;
-        Response.Redirect("QuestionPaperActivity.aspx");
+        if (count != 0)
+        {
+            string username = Request.QueryString["Username"];
+            if (username == null)
+            {
+                username = (string)Session["username"];
+            }
+            string url = "QuestionPaperActivity.aspx?";
+            url += "Username=" + username;
+            Response.Redirect(url);
+        }else
+        {
+            Response.Write(@"<script langauge='text/javascript'>alert('No Selections Made');</script>");
+        }
+    }
+
+    protected void logout(Object sender, EventArgs e)
+    {
+        HttpCookie cookie = Request.Cookies["LoginInfo"];
+        if(cookie != null)
+        {
+            cookie.Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Add(cookie);
+            Response.Redirect("LoginPage.aspx");
+        }else
+        {
+            Response.Redirect("LoginPage.aspx");
+        }
     }
 
 }

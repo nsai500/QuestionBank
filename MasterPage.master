@@ -5,18 +5,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Question Bank Portal</title>
+    <asp:Label runat="server" Text="Question Bank Portal" ForeColor="White"></asp:Label>
     <asp:ContentPlaceHolder id="head" runat="server">
 
     </asp:ContentPlaceHolder>
     <link rel="stylesheet" type="text/css" href="MasterPageLayout.css" />
 </head>
 <body>
-    <form id="form1" runat="server">
     <div class="middle">
-        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        <form id="form1" runat="server">
+            <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         
-        </asp:ContentPlaceHolder>
+            </asp:ContentPlaceHolder>
+        </form>
     </div>
-    </form>
 </body>
 </html>

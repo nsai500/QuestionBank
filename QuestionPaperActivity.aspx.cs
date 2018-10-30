@@ -17,6 +17,8 @@ public partial class QuestionPaperActivity : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            string username = Request.QueryString["Username"];
+            UsernameLabel.Text = "Welcome " + username + "!";
             GridView1.DataSource = (DataTable)Session["SelectedMcqs"];
             GridView2.DataSource = (DataTable)Session["SelectedQuestions"];
             GridView1.DataBind();
@@ -93,6 +95,21 @@ public partial class QuestionPaperActivity : System.Web.UI.Page
         finally
         {
             con.Close();
+        }
+    }
+
+    protected void logout(Object sender, EventArgs e)
+    {
+        HttpCookie cookie = Request.Cookies["LoginInfo"];
+        if (cookie != null)
+        {
+            cookie.Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Add(cookie);
+            Response.Redirect("LoginPage.aspx");
+        }
+        else
+        {
+            Response.Redirect("LoginPage.aspx");
         }
     }
 

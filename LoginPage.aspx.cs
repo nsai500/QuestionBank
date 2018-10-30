@@ -12,9 +12,30 @@ public partial class LoginPage : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //TextBox1.Text = "marco"; //TODO For Testing
-       //TextBox2.Text = "marco";
+        //TextBox2.Text = "marco";
         //login(Button1, EventArgs.Empty);
         //Response.Redirect("AdminActivity.aspx");
+        HttpCookie cookie = Request.Cookies["LoginInfo"];
+        if(cookie != null)
+        {
+            Session["username"] = cookie["username"];
+            Session["subject"] = cookie["subject"];
+            string co_ord = cookie["Co-ordinator"];
+            if (co_ord.Equals("true"))
+            {
+                Session["Co-ordinator"] = true;
+            }
+            else
+            {
+                Session["Co-ordinator"] = false;
+            }
+
+            string username = (string)Session["username"];
+
+            string url = "FacultyActivity.aspx?";
+            url += "Username=" + username;
+            Response.Redirect(url);
+        }
     }
 
     protected void login(object sender, EventArgs e)
@@ -43,7 +64,24 @@ public partial class LoginPage : System.Web.UI.Page
                     Session["username"] = username;
                     Session["subject"] = ds.Tables[0].Rows[0]["Subject"];
                     Session["Co-ordinator"] = ds.Tables[0].Rows[0]["Co_ordinator"];
-                    Response.Redirect("FacultyActivity.aspx");
+
+                    HttpCookie cookie = new HttpCookie("LoginInfo");
+                    cookie["username"] = (string)Session["username"];
+                    cookie["subject"] = (string)Session["subject"];
+                    bool co_ordinator = (bool)Session["Co-ordinator"];
+                    if (co_ordinator)
+                    {
+                        cookie["Co-ordinator"] = "true";
+                    }else
+                    {
+                        cookie["Co-ordinator"] = "false";
+                    }
+                    cookie.Expires = DateTime.Now.AddMinutes(10);
+                    Response.Cookies.Add(cookie);
+
+                    string url = "FacultyActivity.aspx?";
+                    url += "Username=" + username;
+                    Response.Redirect(url);
                 }
                 else //TODO Put Validator
                 {

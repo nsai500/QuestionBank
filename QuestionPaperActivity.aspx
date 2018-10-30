@@ -1,8 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="QuestionPaperActivity.aspx.cs" Inherits="QuestionPaperActivity" Theme="Theme1"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <asp:HyperLink runat="server" NavigateUrl="LoginPage.aspx" ForeColor="White">Logout</asp:HyperLink>
-    <asp:HyperLink runat="server" NavigateUrl="FacultyActivity.aspx" ForeColor="White">Back</asp:HyperLink>
+    <asp:panel runat="server" SkinID="loginHeader">
+        <asp:Label runat="server" ForeColor="White" Font-Size="XX-Large" ID="UsernameLabel"></asp:Label>
+    </asp:panel>
+    <asp:panel runat="server" SkinID="logout">
+        <asp:HyperLink runat="server" NavigateUrl="FacultyActivity.aspx" ForeColor="White">Back</asp:HyperLink>
+        <asp:HyperLink runat="server" NavigateUrl="LoginPage.aspx" ForeColor="White">Logout</asp:HyperLink>
+    </asp:panel>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:Label ID="Label2" runat="server" Text="Question Paper" ForeColor="White"></asp:Label>

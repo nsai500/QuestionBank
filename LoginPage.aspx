@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <asp:panel runat="server" SkinID="loginHeader">
-        <asp:Label runat="server" Text="Question Bank Portal" ForeColor="White" Font-Size="XX-Large"></asp:Label>
+        <asp:Label runat="server" Text="Login Page" ForeColor="White" Font-Size="XX-Large"></asp:Label>
     </asp:panel>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">

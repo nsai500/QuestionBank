@@ -1,30 +1,40 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="AdminActivity.aspx.cs" Inherits="AdminActivity" Theme="Theme1"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <asp:HyperLink runat="server" NavigateUrl="LoginPage.aspx" ForeColor="White">Logout</asp:HyperLink>
+    <asp:panel runat="server" SkinID="loginHeader">
+        <asp:Label runat="server" Text="Welcome Admin!" ForeColor="White" Font-Size="XX-Large"></asp:Label>
+    </asp:panel>
+    <asp:panel runat="server" SkinID="logout">
+        <asp:HyperLink runat="server" NavigateUrl="LoginPage.aspx" ForeColor="White">Logout</asp:HyperLink>
+    </asp:panel>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div id="row1" style="display:flex; flex-direction:row; justify-content: space-around; border:1px solid white;">
         <div class="addFaculty" style="display:flex; flex-direction:column;">
+            <br />
             <asp:TextBox ID="TextBox1" runat="server" placeholder="EmployeeId"></asp:TextBox>
-            <br /><br />
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="EmployeeId is required" ControlToValidate="TextBox1"></asp:RequiredFieldValidator>
+            <br />
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="EmployeeId is required" ControlToValidate="TextBox1" ForeColor="White" ValidationGroup="Faculty"></asp:RequiredFieldValidator>
+            <br />
             <asp:TextBox ID="TextBox2" runat="server" placeholder="Name"></asp:TextBox>
-            <br /><br />
-            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Enter a valid Id" ValidationExpression="[0-9]+"></asp:RegularExpressionValidator>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Name is required" ControlToValidate="TextBox2"></asp:RequiredFieldValidator>
+            <br />
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Enter a valid Id" ValidationExpression="[0-9]+" ControlToValidate="TextBox1" ForeColor="White" ValidationGroup="Faculty"></asp:RegularExpressionValidator>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Name is required" ControlToValidate="TextBox2" ForeColor="White" ValidationGroup="Faculty"></asp:RequiredFieldValidator>
+            <br />
             <asp:TextBox ID="TextBox3" runat="server" placeholder="Subject"></asp:TextBox>
-            <br /><br />
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Subject is required" ControlToValidate="TextBox3"></asp:RequiredFieldValidator>
+            <br />
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Subject is required" ControlToValidate="TextBox3" ForeColor="White" ValidationGroup="Faculty"></asp:RequiredFieldValidator>
+            <br />
             <asp:TextBox ID="TextBox4" runat="server" placeholder="UserName"></asp:TextBox>
-            <br /><br />
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Username is required" ControlToValidate="TextBox4"></asp:RequiredFieldValidator>
+            <br />
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Username is required" ControlToValidate="TextBox4" ForeColor="White" ValidationGroup="Faculty"></asp:RequiredFieldValidator>
+            <br />
             <asp:TextBox ID="TextBox5" runat="server" placeholder="Password"></asp:TextBox>
-            <br /><br />
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="Password is required" ControlToValidate="TextBox5"></asp:RequiredFieldValidator>
+            <br />
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="Password is required" ControlToValidate="TextBox5" ForeColor="White" ValidationGroup="Faculty"></asp:RequiredFieldValidator>
             <asp:CheckBox ID="CheckBox1" runat="server" Text="Co-ordinator" ForeColor="White"/>
-            <br /><br />
-            <asp:Button ID="Button1" runat="server" Text="Sign up Faculty" OnClick="signup"/>
+            <br />
+            <asp:Button ID="Button1" runat="server" Text="Sign up Faculty" OnClick="signup" ValidationGroup="Faculty"/>
             <br /><br />
             <asp:Label ID="Label1" runat="server" ForeColor="White"></asp:Label>
             <br /><br />

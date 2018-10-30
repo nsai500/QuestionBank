@@ -53,7 +53,7 @@
                 <br /><br />
                 <asp:button runat="server" text="Show Added MCQs" OnClick="showMcqs"/>
                 <br /><br />
-                <div style="width: 100%; height: 400px; overflow: scroll">
+                <div style="width: 100%; height: 300px; overflow: scroll">
                     <asp:Gridview runat="server" ID="GridView1" CellPadding="4" ForeColor="#333333" Width="200" BorderColor="Black">
                         <Columns>
                             <asp:TemplateField Visible="false">
@@ -84,7 +84,7 @@
                 <asp:Label ID="Label2" runat="server" ForeColor="White"></asp:Label>
                 <asp:button runat="server" text="Show Added Questions" OnClick="showQuestions"/>
                 <br /><br />
-                <div style="width: 100%; height: 400px; overflow: scroll">
+                <div style="width: 100%; height: 300px; overflow: scroll">
                     <asp:Gridview runat="server" ID="GridView2" CellPadding="4" ForeColor="#333333" Width="200" BorderColor="Black">
                         <Columns>
                             <asp:TemplateField Visible="false">

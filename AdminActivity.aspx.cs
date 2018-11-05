@@ -76,6 +76,10 @@ public partial class AdminActivity : System.Web.UI.Page
             DataTable dt = ds.Tables["QuestionPapers"];
             string mcqs = dt.Rows[0]["Mcqs"].ToString();
             string questions = dt.Rows[0]["Questions"].ToString();
+            Label4.Text = "Subject: " + dt.Rows[0]["Subject"].ToString();
+            Label5.Text = "Exam Date: " + dt.Rows[0]["ExamDate"].ToString().Substring(0,10);
+            Label6.Text = "Duration: " + dt.Rows[0]["Duration"].ToString();
+            Label7.Text = "Max. Marks: " + dt.Rows[0]["marks"].ToString();
             BinaryFormatter bformatter = new BinaryFormatter();
             MemoryStream stream = new MemoryStream();
 

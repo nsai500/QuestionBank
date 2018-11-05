@@ -59,6 +59,14 @@
             </div>
             <asp:ListBox ID="ListBox1" runat="server" AutoPostBack="true" OnSelectedIndexChanged="displayQp" Visible="false"></asp:ListBox>
             <br /><br />
+            <asp:Label ID="Label4" runat="server" ForeColor="White"></asp:Label>
+            <br />
+            <asp:Label ID="Label5" runat="server" ForeColor="White"></asp:Label>
+            <br />
+            <asp:Label ID="Label6" runat="server" ForeColor="White"></asp:Label>
+            <br />
+            <asp:Label ID="Label7" runat="server" ForeColor="White"></asp:Label>
+            <br />
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" Width="200" BorderColor="Black">
                 <headerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></headerstyle>
                 <AlternatingRowStyle BackColor="#BFE4FF" ForeColor="Black"  />

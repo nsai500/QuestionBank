@@ -15,8 +15,9 @@
         <asp:Button ID="Button4" runat="server" Text="Delete Selected" OnClick="delete" OnClientClick="return confirm('Are you sure?')"/>
         <br /><br />
     </div>
-    <div id="row1" style="display:flex; flex-direction:row; justify-content: space-around;">
+    <div id="row1" style="display:flex; flex-direction:row; justify-content: space-around; border:1px solid white;"">
             <div id="addMCQ" style="display:flex; flex-direction:column;">
+                <br /><br />
                 <asp:TextBox ID="TextBox1" runat="server" placeholder="Question"></asp:TextBox>
                 <br />
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Question is required" ControlToValidate="TextBox1" ForeColor="White" ValidationGroup="MCQ"></asp:RequiredFieldValidator>
@@ -47,16 +48,18 @@
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="Mark is required" ControlToValidate="TextBox7" ForeColor="White" ValidationGroup="MCQ"></asp:RequiredFieldValidator>
                 <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="Enter mark between 0 and 99.9" Type="Double" MinimumValue="0" MaximumValue="99.9" ControlToValidate="TextBox7" ForeColor="White" ValidationGroup="MCQ"></asp:RangeValidator>
                 <br />
-                <asp:Button ID="Button1" runat="server" Text="Add MCQ" OnClick="addMCQ"  ValidationGroup="MCQ"/>
+                <asp:Button ID="Button1" runat="server" Text="Add MCQ" OnClick="addMCQ" ValidationGroup="MCQ"/>
+                <asp:Button ID="Button6" runat="server" Text="Update" OnClick="update" Visible="false" ValidationGroup="MCQ"/>
                 <br /><br />
                 <asp:Label ID="Label1" runat="server" ForeColor="White"></asp:Label>
                 <br /><br />
-                <asp:button runat="server" text="Show Added MCQs" OnClick="showMcqs"/>
+                <asp:button ID="Button7" runat="server" text="Show Added MCQs" OnClick="showMcqs"/>
                 <br /><br />
+                <asp:Button ID="Button5" runat="server" Text="Update" OnClick="showUpdate" Visible="false"/>
                 <div style="width: 100%; height: 300px; overflow: scroll">
                     <asp:Gridview runat="server" ID="GridView1" CellPadding="4" ForeColor="#333333" Width="200" BorderColor="Black">
                         <Columns>
-                            <asp:TemplateField Visible="false">
+                            <asp:TemplateField>
                                 <ItemTemplate>
                                     <asp:CheckBox ID="myCheckBox" runat="server" />
                                 </ItemTemplate>
@@ -70,6 +73,7 @@
                 </div>
             </div>
             <div  id="addQuestion" style="display:flex; flex-direction:column;">
+                <br /><br />
                 <asp:TextBox ID="TextBox8" runat="server" placeholder="Question"></asp:TextBox>
                 <br />
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="Question is required" ControlToValidate="TextBox8" ValidationGroup="Question" ForeColor="White"></asp:RequiredFieldValidator>
@@ -82,12 +86,14 @@
                 <asp:Button ID="Button2" runat="server" Text="Add Question" OnClick="addQuestion" ValidationGroup="Question"/>
                 <br /><br />
                 <asp:Label ID="Label2" runat="server" ForeColor="White"></asp:Label>
-                <asp:button runat="server" text="Show Added Questions" OnClick="showQuestions"/>
+                <asp:button ID="Button10" runat="server" text="Show Added Questions" OnClick="showQuestions"/>
+                <asp:Button ID="Button9" runat="server" Text="Update" Visible="false" OnClick="updateQ" ValidationGroup="Question"/>
                 <br /><br />
+                <asp:Button ID="Button8" runat="server" Text="Update" OnClick="showQUpdate" Visible="false"/>
                 <div style="width: 100%; height: 300px; overflow: scroll">
                     <asp:Gridview runat="server" ID="GridView2" CellPadding="4" ForeColor="#333333" Width="200" BorderColor="Black">
                         <Columns>
-                            <asp:TemplateField Visible="false">
+                            <asp:TemplateField>
                                 <ItemTemplate>
                                     <asp:CheckBox ID="myCheckBox" runat="server" />
                                 </ItemTemplate>
@@ -101,4 +107,3 @@
             </div>
     </div>
 </asp:Content>
-

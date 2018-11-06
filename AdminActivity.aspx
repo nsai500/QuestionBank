@@ -35,9 +35,15 @@
             <asp:CheckBox ID="CheckBox1" runat="server" Text="Co-ordinator" ForeColor="White"/>
             <br />
             <asp:Button ID="Button1" runat="server" Text="Sign up Faculty" OnClick="signup" ValidationGroup="Faculty"/>
+            <asp:Button ID="Button2" runat="server" Text="Show Faculty" OnClick="displayFaculty"/>
             <br /><br />
             <asp:Label ID="Label1" runat="server" ForeColor="White"></asp:Label>
             <br /><br />
+            <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="true" CellPadding="4" ForeColor="#333333" Width="200" BorderColor="Black">
+                <headerstyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></headerstyle>
+                <AlternatingRowStyle BackColor="#BFE4FF" ForeColor="Black"  />
+                <RowStyle ForeColor="Black" BackColor="White" />
+            </asp:GridView>
         </div>
         <div  style="display:flex; flex-direction:column;">
             <div id="row2" style="display:flex; flex-direction:row; justify-content: space-around;">

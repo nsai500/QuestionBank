@@ -25,8 +25,6 @@ public partial class FacultyActivity : System.Web.UI.Page
         if (co_ordinator)
         {
             Button3.Visible = true;
-            GridView1.Columns[0].Visible = true;
-            GridView2.Columns[0].Visible = true;
         }
     }
 
@@ -74,6 +72,7 @@ public partial class FacultyActivity : System.Web.UI.Page
 
     protected void showMcqs(object sender, EventArgs e)
     {
+        Button5.Visible = true;
         bool co_ordinator = (bool)Session["Co-ordinator"];
         if (!co_ordinator)
         {
@@ -168,6 +167,7 @@ public partial class FacultyActivity : System.Web.UI.Page
 
     protected void showQuestions(object sender, EventArgs e)
     {
+        Button8.Visible = true;
         bool co_ordinator = (bool)Session["Co-ordinator"];
         if (!co_ordinator)
         {
@@ -349,4 +349,193 @@ public partial class FacultyActivity : System.Web.UI.Page
         }
     }
 
+    protected void showUpdate(object sender, EventArgs e)
+    {
+        if (!Button6.Visible)
+        {
+            Button1.Visible = false;
+            Button6.Visible = true;
+            Button7.Visible = false;
+            Button5.Text = "Cancel Update";
+            int count = 0;
+            foreach (GridViewRow row in GridView1.Rows)
+            {
+                CheckBox check = (CheckBox)row.FindControl("myCheckBox");
+                if (check != null && check.Checked)
+                {
+                    count++;
+                    TextBox1.Text = row.Cells[1].Text;
+                    TextBox2.Text = row.Cells[2].Text;
+                    TextBox3.Text = row.Cells[3].Text;
+                    TextBox4.Text = row.Cells[4].Text;
+                    TextBox5.Text = row.Cells[5].Text;
+                    TextBox6.Text = row.Cells[6].Text;
+                    TextBox7.Text = row.Cells[7].Text;
+                }
+                if (count == 1) break;
+            }
+        }
+        else
+        {
+            Button6.Visible = false;
+            Button1.Visible = true;
+            Button7.Visible = true;
+            Button5.Text = "Update";
+        }
+    }
+
+    protected void update(object sender, EventArgs e)
+    {
+        int count = 0;
+        string prev_question = "";
+        foreach (GridViewRow row in GridView1.Rows)
+        {
+            CheckBox check = (CheckBox)row.FindControl("myCheckBox");
+            if (check != null && check.Checked)
+            {
+                count++;
+                prev_question = row.Cells[1].Text;
+            }
+        }
+
+        if (count != 1)
+        {
+            Response.Write(@"<script langauge='text/javascript'>alert('Please select one MCQ for update');</script>");
+        }
+        else
+        {
+            string question = TextBox1.Text;
+            string optA = TextBox2.Text;
+            string optB = TextBox3.Text;
+            string optC = TextBox4.Text;
+            string optD = TextBox5.Text;
+            string answer = TextBox6.Text;
+            string marks = TextBox7.Text;
+
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = @"Data Source=(localdb)\MSSQLlocalDB;Initial Catalog=QuestionBank;Integrated Security=True;Pooling=False";
+            string query = "UPDATE Mcqs SET question=@question,optionA=@optA,optionB=@optB,optionC=@optC,optionD=@optD,answer=@answer,mark=@marks WHERE question=@prev_question";
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@question", question);
+            cmd.Parameters.AddWithValue("@prev_question", prev_question);
+            cmd.Parameters.AddWithValue("@optA", optA);
+            cmd.Parameters.AddWithValue("@optB", optB);
+            cmd.Parameters.AddWithValue("@optC", optC);
+            cmd.Parameters.AddWithValue("@optD", optD);
+            cmd.Parameters.AddWithValue("@answer", answer);
+            cmd.Parameters.AddWithValue("@marks", Convert.ToDecimal(marks));
+            count = 0;
+            try
+            {
+                con.Open();
+                foreach (GridViewRow row in GridView1.Rows)
+                {
+                    CheckBox check = (CheckBox)row.FindControl("myCheckBox");
+                    if (check != null && check.Checked)
+                    {
+                        cmd.ExecuteNonQuery();
+                        count++;
+                    }
+                    if (count == 1) break;
+                }
+            }
+            catch (Exception exception)
+            {
+                Label1.Text = "Error Occurred, Please check the input!";
+            }
+            finally
+            {
+                con.Close();
+                Response.Redirect("FacultyActivity.aspx");
+            }
+        }
+    }
+
+
+    protected void showQUpdate(object sender, EventArgs e)
+    {
+        if (!Button9.Visible)
+        {
+            Button10.Visible = false;
+            Button9.Visible = true;
+            Button2.Visible = false;
+            Button8.Text = "Cancel Update";
+            int count = 0;
+            foreach (GridViewRow row in GridView2.Rows)
+            {
+                CheckBox check = (CheckBox)row.FindControl("myCheckBox");
+                if (check != null && check.Checked)
+                {
+                    count++;
+                    TextBox8.Text = row.Cells[1].Text;
+                    TextBox9.Text = row.Cells[2].Text;
+                }
+                if (count == 1) break;
+            }
+        }
+        else
+        {
+            Button9.Visible = false;
+            Button10.Visible = true;
+            Button2.Visible = true;
+            Button8.Text = "Update";
+        }
+    }
+
+    protected void updateQ(object sender, EventArgs e)
+    {
+        int count = 0;
+        string prev_question = "";
+        foreach (GridViewRow row in GridView2.Rows)
+        {
+            CheckBox check = (CheckBox)row.FindControl("myCheckBox");
+            if (check != null && check.Checked)
+            {
+                count++;
+                prev_question = row.Cells[1].Text;
+            }
+        }
+
+        if (count != 1)
+        {
+            Response.Write(@"<script langauge='text/javascript'>alert('Please select one question for update');</script>");
+        }
+        else
+        {
+            string question = TextBox8.Text;
+            string marks = TextBox9.Text;
+
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = @"Data Source=(localdb)\MSSQLlocalDB;Initial Catalog=QuestionBank;Integrated Security=True;Pooling=False";
+            string query = "UPDATE Questions SET question=@question,mark=@marks WHERE question=@prev_question";
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@question", question);
+            cmd.Parameters.AddWithValue("@prev_question", prev_question);
+            cmd.Parameters.AddWithValue("@marks", Convert.ToDecimal(marks));
+            count = 0;
+            try
+            {
+                con.Open();
+                foreach (GridViewRow row in GridView2.Rows)
+                {
+                    CheckBox check = (CheckBox)row.FindControl("myCheckBox");
+                    if (check != null && check.Checked)
+                    {
+                        cmd.ExecuteNonQuery();
+                        count++;
+                    }
+                    if (count == 1) break;
+                }
+            }
+            catch (Exception exception)
+            {
+                Label2.Text = "Error Occurred, Please check the input!";
+            }
+            finally
+            {
+                con.Close();
+                Response.Redirect("FacultyActivity.aspx");
+            }
+        }
+    }
 }

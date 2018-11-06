@@ -133,6 +133,7 @@ public partial class AdminActivity : System.Web.UI.Page
     protected void populate2(object sender, EventArgs e)
     {
         ListBox1.Items.Clear();
+        ListBox1.Visible = true;
         string subject = DropDownList1.SelectedValue;
         SqlConnection con = new SqlConnection();
         con.ConnectionString = @"Data Source=(localdb)\MSSQLlocalDB;Initial Catalog=QuestionBank;Integrated Security=True;Pooling=False";
@@ -159,4 +160,30 @@ public partial class AdminActivity : System.Web.UI.Page
 
     }
 
+
+    protected void displayFaculty(object sender, EventArgs e)
+    {
+        SqlConnection con = new SqlConnection();
+        con.ConnectionString = @"Data Source=(localdb)\MSSQLlocalDB;Initial Catalog=QuestionBank;Integrated Security=True;Pooling=False";
+        string query = "SELECT * FROM Faculty";
+        SqlCommand cmd = new SqlCommand(query, con);
+        SqlDataAdapter adp = new SqlDataAdapter(cmd);
+        DataSet ds = new DataSet();
+        try
+        {
+            con.Open();
+            adp.Fill(ds, "Faculty");
+            DataTable dt = ds.Tables[0];
+            GridView3.DataSource = dt;
+            this.DataBind();
+        }
+        catch (Exception exception)
+        {
+            Label1.Text = exception.ToString();
+        }
+        finally
+        {
+            con.Close();
+        }
+    }
 }
